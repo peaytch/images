@@ -1,0 +1,47 @@
+from guizero import App, TextBox, PushButton, Picture, Text
+from random import randrange
+
+questions = ['What Python function is equivalent to the Scratch "say" block?',
+             'What Python module contains the randint function?',
+             'Fill in the blank - pseudo____?',
+             'What is JS short for?',
+             'How many letters in Python?']
+
+answers = ['print',
+           'random',
+           'code',
+           'JavaScript',
+           '6']
+
+
+def start_quiz():
+    question.index_value = randrange(len(questions))
+    question.value = questions[question.index_value]
+    start.text = 'Next'
+    result.value = ''
+    input_box.value = ''
+    input_box.focus()
+    start.hide()
+    check_answer.show()
+
+
+def check():
+    if input_box.value.lower() == answers[question.index_value].lower():
+        result.value = 'Correct'
+        check_answer.hide()
+        start.show()
+    else:
+        result.value = 'Incorrect'
+        check_answer.show()
+        start.hide()
+
+
+app = App(title='Quiz', width=500, height=300)
+question = Text(app, text='Ready to start the quiz?')
+input_box = TextBox(app, text='Answer')
+check_answer = PushButton(app, command=check, text='Check answer')
+check_answer.hide()
+result = Text(app, text='Press Start to begin!')
+start = PushButton(app, command=start_quiz, text='Start')
+
+app.display()
